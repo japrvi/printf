@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   printf.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpozuelo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/13 13:31:35 by jpozuelo          #+#    #+#             */
+/*   Updated: 2021/10/13 19:10:17 by jpozuelo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "printf.h"
 
 //Recibe por parametros  una cadena de texto a imprimir que escribe el salida estandar
@@ -18,36 +30,36 @@ int	ft_printf(const char *main, ...)
 		{
 			aux = chooser(args, main[i + 1]);
 			if (aux)
-				write(1, aux, ft_strlen(aux));
+			{
+				write(1, aux, ft_strlon(aux));
+				free()
+			}
 			else 
 				return (1);
-			i = i + 2;
+			i += 2;
 		}
 		else
 			write(1, main + i, 1);
 	}
 	return (0);
 }
-//Analiza el caracter c y escoge la función adecuada. Estas funciones
-//devolveran como resultado null en el caso de que el delimitador no sea valido
-//o una cadena de caracteres que permite seguir imprimiendo.
+
 char	*chooser(va_list args, char c)
 {
 }
-//%d,%i,%u. Reservan memoria de manera dinámica. Al terminar la lectura de aux
-//debe liberarse.
+
 char 	*itoa(int num, char c)
 {
 }
-//%x,%X
+
 char	*itoa_base(int num, char *base)
 {
 }
-//%p
+
 char	*itoa_pointer(int num, char *base)
 {
 }
-//%c,%%
+
 char	*putchar(char c)
 {
 }
