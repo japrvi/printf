@@ -6,19 +6,20 @@
 /*   By: jpozuelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 13:31:50 by jpozuelo          #+#    #+#             */
-/*   Updated: 2021/10/22 16:45:38 by jpozuelo         ###   ########.fr       */
+/*   Updated: 2021/10/22 19:44:08 by jpozuelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int		chooser(va_list args, char c)
 {
 	char			*aux;
 	unsigned int	len;
 
+	len = 0;
 	if (c == 'c')
-		aux = ft_char(c);
+		aux = ft_char(va_arg(args, int));
 	if (c == 'i' || c == 'd')
 		aux = itoa(va_arg(args, int));
 	if (c == 'u')
@@ -33,8 +34,11 @@ int		chooser(va_list args, char c)
 		aux = va_arg(args, char *);
 	if (c == '%')
 		aux = ft_char('%');
-	len = ft_strlon(aux);
+	if (aux)
+		len = ft_strlon(aux);
 	write(1, aux, len);
+	if (c != 's')
+		free(aux);
 	return (len);
 }
 
@@ -50,11 +54,11 @@ char	*itoa(int num)
 	while (num >= 10)
 	{
 		res[i++] = num % 10 + '0';
-		num /= 10;
+		num = num / 10;
 	}
 	res[i] = num % 10 + '0';
 	if (sign)
-		res[++i] = '-';
+		res[i++] = '-';
 	ft_rev_str(res, i);
 	res[++i] = 0;
 	return(res);
@@ -106,7 +110,7 @@ char	*ft_char(char c)
 	char *aux;
 
 	aux = (char *) malloc(2);
-	aux[0] = c;
+	aux[0] = (char) c;
 	aux[1] = 0;
 	return (aux);
 }

@@ -6,11 +6,11 @@
 /*   By: jpozuelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 13:31:35 by jpozuelo          #+#    #+#             */
-/*   Updated: 2021/10/21 16:08:06 by jpozuelo         ###   ########.fr       */
+/*   Updated: 2021/10/22 18:51:41 by jpozuelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	ft_printf(const char *main, ...)
 {
@@ -36,4 +36,25 @@ int	ft_printf(const char *main, ...)
 		}
 	}
 	return (ack);
+}
+
+char	*itoa_base(unsigned num, char *base)
+{
+	char			*res;
+	unsigned int	i;
+
+	res = (char *) malloc(5);
+	if (res)
+	{
+		i = 0;
+		while (num >= 16)
+		{
+			res[i++] = base[num % 16];
+			num /= 16;
+		}
+		res[i] = num % 16;
+		ft_rev_str(res, i++);
+		res[i] = 0;
+	}
+	return (res);
 }
